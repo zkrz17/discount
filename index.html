@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Promotions Nike</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <h1 class="mb-4 text-center">Nike promos</h1>
+
+    <!-- Barre de recherche -->
+    <form class="input-group mb-3" method="get" action="/">
+      <input type="text" class="form-control" name="q" placeholder="Rechercher un produit">
+      <button class="btn btn-outline-secondary" type="submit">Rechercher</button>
+    </form>
+
+    <!-- Bouton de tri -->
+    <div class="text-end mb-3">
+      <a href="/?tri=prix" class="btn btn-primary">Trier par prix croissant</a>
+    </div>
+
+    <!-- Liste des produits -->
+    <div class="row">
+      {% for produit in produits %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            {% if produit.Image %}
+              <img src="{{ produit.Image }}" class="card-img-top" alt="{{ produit.Nom }}">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ produit.Nom }}</h5>
+
+              <!-- Prix simple en noir -->
+              <p class="card-text">
+                {% if produit.Prix %}
+                  <span class="fw-bold text-dark">{{ produit.Prix }} $</span>
+                {% endif %}
+              </p>
+
+              {% if produit.Lien %}
+                <a href="{{ produit.Lien }}" class="btn btn-sm btn-success" target="_blank">Voir le produit</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
